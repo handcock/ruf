@@ -1,0 +1,36 @@
+projhomepage <- "www.csde.washington.edu/handcock/ruf"
+
+ruftitle <- "Estimates of the Resource Utilization Function"
+rufdesc <- packageDescription("ruf")
+rufversion <- rufdesc$Version
+rufdate <- rufdesc$Date
+s <- regexpr("20[0-9][0-9]", rufdate)
+rufyear <- ifelse (s==-1, "2003", substr(rufdate, s, s+3))
+rufauthors <- c("Mark S. Handcock")
+
+citHeader(
+   "If you are using the 'ruf' package for research that will be published, ",
+   "we request that you acknowledge this by citing 'ruf' as shown below.\n\n",
+   'For BibTeX format, use toBibtex(citation("ruf")).',
+   sep="")
+   
+citEntry(entry="Manual",
+         author = rufauthors,
+         title = ruftitle,
+         year         = rufyear,
+         note         = paste("Version ", rufversion,
+                        ". }", 
+                        sep=""),
+         address      = "Los Angeles, CA",
+         url          = "http://www.csde.washington.edu/~handcock/ruf",
+         textVersion = paste(paste(rufauthors, collapse=", "), " (", rufyear,
+               "), ", ruftitle, ". Version ", rufversion,
+               ". URL http://www.csde.washington.edu/~handcock/ruf.",
+               sep="")
+         )
+
+         
+citFooter("We have invested a lot of time and effort in creating the",
+          "'ruf' suite of packages for use by other researchers.",
+          "Please cite it in all papers where it is used.")
+          

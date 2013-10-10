@@ -1,0 +1,12 @@
+
+useDynLib(ruf)
+
+importFrom(utils, packageDescription)
+
+# Export all names that do not begin with a dot.
+export(
+ruf.fit,
+maternmle,
+summary.ruf,
+vmatcov
+)

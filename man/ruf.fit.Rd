@@ -1,0 +1,160 @@
+\name{ruf.fit}
+\alias{ruf.fit}
+\title{Estimates of the Resource Utilization Function}
+\description{
+  Function to calculate maximum likelihood fits of the Resource 
+  Utilization Function using on a Matern covariance function.
+}
+\usage{
+ruf.fit(
+        formula,
+        space,
+        data,
+        subset,
+        na.action,
+        theta=NULL,
+        standardized=FALSE,
+        algorithm.control=list(),
+        name="",
+        fixrange=FALSE, fixsmoothness=TRUE, \dots)
+}
+\arguments{
+  \item{formula}{An \R formula object, of the form \code{RU ~ <covariate terms>},
+  where \code{RU} is the name of the RU values.
+  The \code{<model terms>} are a list of variables that are covariates.
+  All variables must be in the data.frame specified by the \code{data} argument.
+  }
+  \item{space}{An \R formula object, of the form \code{~ x + y},
+  where \code{x} and \code{y} are the names of the variables containing the two
+coordinates of the RU variable.}
+  \item{data}{a data.frame containing columns for the spatial coordinates,
+             covariates,
+          and RUF values as described. The variables can have any names and are
+             specified in the formula and 'space' formula in the \code{ruf.fit} call.
+
+          coordinates: Two variables where each row has the 2-D coordinates
+          of the n RU locations.
+
+          RUF: a vector of the RU values at the n locations given by the
+              coordinates.
+          covariates: a set of p vectors of covariates to be fit}
+  \item{subset}{an optional vector specifying a subset of observations
+    to be used in the fitting process.}
+  \item{na.action}{a function which indicates what should happen
+    when the data contain \code{NA}s.  The default is set by
+    the \code{na.action} setting of \code{\link{options}}, and is
+    \code{\link{na.fail}} if that is unset.  The \dQuote{factory-fresh}
+    default is \code{\link{na.omit}}.}
+  \item{theta}{2-vector of Matern correlation parameters: spatial range and
+smoothness.}
+  \item{standardized}{logical: Compute standardized coefficients?}
+  \item{algorithm.control}{An optional list of control parameters. See the \bold{Algorithm Tuning} 
+    section below for the options.}
+  \item{name}{Name of the bird to report in the formatted results.}
+  \item{fixrange}{logical: if TRUE the range of the model is fixed at the
+starting value rather than estimated.}
+  \item{fixsmoothness}{logical: if TRUE the smoothness of the model is fixed at the
+starting value rather than estimated.}
+  \item{\dots}{further arguments passed to or from other methods.}
+}
+\value{
+  \item{par}{MLE of the spatial range and smoothness}
+  \item{value}{Value of the log-likelihood at the MLE.}
+  \item{counts}{number of log-likelihood and gradient evaluations taken.}
+  \item{convergence}{0: converged. See `optim' for details.}
+  \item{message}{Message associated with the type of convergence.}
+  \item{hessian}{Hessian matrix of the ML estimates.}
+  \item{pplik}{MLE of the spatial range and smoothness}
+  \item{beta}{MLE of the regression coefficients}
+  \item{value}{Value of the log-likelihood at the MLE.}
+  \item{asycor}{asymptotic correlation matrix of the MLE.}
+  \item{asyse}{asymptotic standard errors of the MLE.}
+}
+\note{
+  The code uses the \code{optim} function to maximize the log-likelihood.
+  If the \code{fixrange} or \code{fixsmoothness} options are used the
+  one-dimensional \code{optimize} is used instead.}
+\section{Algorithm Tuning}{
+
+There are a large number of parameters that can modified 
+the computational aspects. These are specified via the
+\code{algorithm.control} argument.
+The \code{algorithm.control} argument is a list that can supply any of the
+  following components:
+  \describe{
+    \item{\code{maxit}}{count; The maximum number of iterations in the
+      Newton-Raphson optimization.  Defaults to \code{15}.
+      \code{maxit} gives the total number of likelihood
+      function evaluations.}
+    \item{sample}{The number of values of the data to subsample for the re-sampled MLE method for large data sets. Default is no sub-sampling, i.e., use the full data unless the data set has over 2000 points in it.}
+    \item{nresamples}{The number of re-samples of the full dataset to take. This is for use with the re-sampled MLE method for large data sets. Default is no sub-sampling, i.e., use the full data unless the data set has over 2000 points in it.}
+    \item{reltol}{Relative convergence tolerance.  The algorithm stops if
+          it is unable to reduce the value by a factor of
+          `reltol * (abs(val) + reltol)' at a step.  Defaults to
+          `sqrt(.Machine\$double.eps)', typically about `1e-8'.}
+    \item{factr}{controls the convergence of the `"L-BFGS-B"' method.
+          Convergence occurs when the reduction in the objective is
+          within this factor of the machine tolerance. Default is
+          `1e7', that is a tolerance of about `1e-8'.}
+    \item{\code{trace}}{non-negative integer; If positive,
+      tracing information on the
+      progress of the optimization is produced. Higher values may
+      produce more tracing information: for method \code{"L-BFGS-B"}
+      there are six levels of tracing.  (To understand exactly what
+      these do see the source code for \code{\link[stats]{optim}}: higher
+      levels give more detail.)}
+    \item{\code{method}}{character; The name of the optimization method
+       to use for the maximum likelihood estimation. See \code{\link[stats]{optim}} for the options. 
+       The default method for the maximixation of the smoothness and range is
+       \code{"BFGS"}, a quasi-Newton method (also known as a variable
+       metric algorithm). It is attributed to
+       Broyden, Fletcher, Goldfarb and Shanno. This uses function values
+       and gradients to build up a picture of the surface to be optimized.
+       The default method for one-dimensional searchs is that of Nelder and Mead \code{Nelder-Mead}.}
+  }
+}
+\examples{
+#
+# attach the "ruf" library
+#
+library(ruf)
+#
+# attach the small test data within the library
+#
+data(d412)
+#
+# Set initial estimates at the spatial range and smoothness
+#
+hval <- c(0.2, 1.5)
+#
+# Estimate the maximum likelihood values
+# with unstandardized coefficients
+#
+d412.fit <- ruf.fit(ruf ~ CWED + IJI + NP + MSI,
+         space= ~ x + y,
+         data=d412, theta=hval,
+         name="Bird 412",
+         standardized=FALSE)
+#
+# Show the details of the results
+#
+summary(d412.fit)
+#
+# Estimate the maximum likelihood values
+# with standardized coefficients
+#
+d412.fit <- ruf.fit(ruf ~ CWED + IJI + NP + MSI,
+         space= ~ x + y,
+         data=d412, theta=hval,
+         name="Bird 412 standardized",
+         standardized=TRUE)
+summary(d412.fit)
+}
+\references{
+``Resource utilization by an avian nest predator: relating resources to a probabilistic
+measure of animal space use,"
+by John M. Marzluff, J. J. Millspaugh, P. Hurvitz, and Mark S. Handcock.
+\emph{Ecology}, 2004, 85:1411-1427.
+}
+\keyword{models}
+\keyword{regression}
