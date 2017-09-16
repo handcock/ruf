@@ -1,9 +1,9 @@
 projhomepage <- "www.csde.washington.edu/handcock/ruf"
 
 ruftitle <- "Estimates of the Resource Utilization Function"
-rufdesc <- packageDescription("ruf")
-rufversion <- rufdesc$Version
-rufdate <- rufdesc$Date
+#rufdesc <- packageDescription("ruf")
+rufversion <- meta$Version
+rufdate <- meta$Date
 s <- regexpr("20[0-9][0-9]", rufdate)
 rufyear <- ifelse (s==-1, "2003", substr(rufdate, s, s+3))
 rufauthors <- c("Mark S. Handcock")

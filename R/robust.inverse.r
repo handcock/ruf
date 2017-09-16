@@ -1,3 +1,4 @@
+#' @keywords internal
 "robust.inverse" <- function (H, tol = sqrt(.Machine$double.eps)) 
 {
     iH <- try(solve(H), silent=TRUE)

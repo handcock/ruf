@@ -1,7 +1,7 @@
 Package: ruf
-Version: 1.5-2
-Date: April 1, 2012
-Title: Estimates of the Resource Utilization Function
+Version: 1.5-3
+Date: 2015-05-21
+Title: Estimates of the Resource Utilization Function 
 Author: Mark S. Handcock <handcock@stat.ucla.edu>
 Maintainer: Mark S. Handcock <handcock@stat.ucla.edu>
 Description: The library contains R-functions to determine maximum
@@ -10,4 +10,4 @@ Description: The library contains R-functions to determine maximum
 Depends:
 License: GPL-3 + file LICENSE
 URL: http://www.csde.washington.edu/~handcock/ruf
-Packaged: 2013-10-10 00:00:14 UTC; handcock
+RoxygenNote: 6.0.1
