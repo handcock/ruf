@@ -1,11 +1,3 @@
----
-output:
-  md_document:
-    variant: markdown_github
----
-
-
-
 # Software to Implement Resource Utilization Function Estimation
 
 
@@ -52,22 +44,22 @@ uncertainty. This requires the above `ruf` package.
 
 
 ```r
-#
+
 # load the "ruf" library
-#
+
 library(ruf)
-#
+
 # attach the small test data within the library
-#
+
 data(d412)
-#
+
 # Set initial estimates at the spatial range and smoothness
-#
+
 hval <- c(0.2, 1.5)
-#
+
 # Estimate the maximum likelihood values
 # with unstandardized coefficients
-#
+
 d412.fit <- ruf.fit(ruf ~ CWED + IJI + NP + MSI,
          space= ~ x + y,
          data=d412, theta=hval,
