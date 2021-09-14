@@ -28,6 +28,7 @@
 #' }
 #' 
 #' @method summary ruf
+#' @export
 summary.ruf <- function(object, results = "", ...){
    if(!missing(results)){sink(file=results,append=TRUE)}
    cllik <-  -2*(object$lsfit$pllik-object$fit$pllik)
@@ -40,7 +41,7 @@ summary.ruf <- function(object, results = "", ...){
                    "LS Log-Lik =",format(object$lsfit$pllik,2),"\n"),
        file=results,append=TRUE)
    cat(paste("\nChange in Log-Lik",format(0.5*cllik,2),
-      "p-value =",format.pval(1-pchisq(cllik,2),eps=0.0001),"\n"),
+      "p-value =",format.pval(1-stats::pchisq(cllik,2),eps=0.0001),"\n"),
        file=results,append=TRUE)
    cat(paste("\n"),file=results,append=TRUE)
 #

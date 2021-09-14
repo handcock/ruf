@@ -30,7 +30,7 @@ standard errors, etc. and additionally gives \dQuote{significance stars} if
 }
 \examples{
 
-## --- Continuing the Example from  '?ruf.fit':\%\\code{\\link{ruf.fit}}:
+## --- Continuing the Example from  '?ruf.fit':\%\code{\link{ruf.fit}}:
 \dontrun{
 summary(d412.fit)
 }

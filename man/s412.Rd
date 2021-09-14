@@ -4,7 +4,9 @@
 \name{s412}
 \alias{s412}
 \title{Data for a test Jay in `ruf'}
-\format{An data.frame object}
+\format{
+An data.frame object
+}
 \description{
 Data set in `geodata' form for a Jay to test maximum likelihood fits of the
 Resource Utilization Function using on a Matern covariance function.

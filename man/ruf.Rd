@@ -3,11 +3,7 @@
 \docType{package}
 \name{ruf}
 \alias{ruf}
-\alias{ruf-package}
-\title{This package provides functionality 
-to determine maximum
-likelihood fits of the Resource Utilization Function based on a
-Matern covariance function.}
+\title{Software to Implement Resource Utilization Function Estimation}
 \description{
 This package provides functionality 
 to determine maximum

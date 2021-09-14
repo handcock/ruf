@@ -1,11 +1,14 @@
+#' Software to Implement Resource Utilization Function Estimation
+#'
 #' This package provides functionality 
 #' to determine maximum
 #' likelihood fits of the Resource Utilization Function based on a
 #' Matern covariance function.
 #' @docType package
 #' @name ruf
-#' @useDynLib ruf
+#' @useDynLib ruf, .registration = TRUE
 #' @importFrom utils packageDescription
+#' @importFrom stats contrasts dist is.empty.model lm model.matrix model.offset model.response model.weights optim pchisq var
 NULL
 
 #' Data for a test Jay

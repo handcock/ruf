@@ -11,6 +11,7 @@ c     cov is an array of num x num.
 c     num is the dimension of x and of the matrix cov.
 c
       implicit double precision (a-h,o-z)
+      integer it3
       double precision zero, one
       double precision half, two
       double precision cov(num,num)
@@ -43,7 +44,7 @@ c
            if(t3 .le. 10.0d0) then
             p1 = t2 * d
             cnv = (two**(t3-one))*dgamma(t3)
-            it3 = dint(t3)
+            it3 = int(dint(t3))
             call rkbesl(p1,t3-it3,it3+1,1,bk,ncalc)
             cov(i,j) = t1*(p1**t3)*bk(it3+1)/cnv
            else
@@ -522,7 +523,7 @@ C--------------------------------------------------------------------
   500 RETURN
 C---------- Last line of RKBESL ----------
       END
-      DOUBLE PRECISION FUNCTION DGAMMA(X)
+      DOUBLE PRECISION FUNCTION DGMMA(X)
 C----------------------------------------------------------------------
 C
 C This routine calculates the GAMMA function for a real argument X.
@@ -748,7 +749,7 @@ C  Final adjustments and return
 C----------------------------------------------------------------------
       IF (PARITY) RES = -RES
       IF (FACT .NE. ONE) RES = FACT / RES
-  900 DGAMMA = RES
+  900 DGMMA = RES
       RETURN
 C ---------- Last line of GAMMA ----------
       END

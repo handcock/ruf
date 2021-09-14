@@ -4,7 +4,9 @@
 \name{d412}
 \alias{d412}
 \title{Data for a test Jay}
-\format{An data.frame object}
+\format{
+An data.frame object
+}
 \description{
 Data set in standard \code{data.frame} form for a Jay to test maximum likelihood
 fits of the Resource Utilization Function using on a Matern covariance

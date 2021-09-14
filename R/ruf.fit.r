@@ -156,7 +156,7 @@
     w <- model.weights(mf)
     offset <- model.offset(mf)
 #
-    coords <- model.matrix(space, data)[,-1]
+    coords <- model.matrix(object=space, data=data)[,-1]
 #
     if (!is.null(offset) && length(offset) != NROW(y)) 
         stop("Number of offsets is ", length(offset), ", should equal ", 
@@ -169,7 +169,7 @@
             z$fitted.values <- offset
     }
     else {
-        x <- model.matrix(mt, mf, contrasts)
+        x <- model.matrix(object=mt, data=mf)
     }
 #
 # Back to the code
@@ -307,7 +307,7 @@
   drange <- range(dist(coords))
   z <- list(theta=theta)
   if(!fixrange & !fixsmoothness){
-   z <- optim(par=theta,
+   z <- stats::optim(par=theta,
     fn=ruf.llik,
     hessian=TRUE,
 #   method=method,
@@ -323,7 +323,7 @@
   }else{
    if(!fixrange){
     options(warn=-1)
-    z <- optim(par=theta[-2],
+    z <- stats::optim(par=theta[-2],
      fn=ruf.vllik,
      hessian=TRUE,
      method=con$method,
@@ -334,7 +334,7 @@
     options(warn=0)
     z$theta <- c(z$par,theta[2])
     names(z$theta) <- c("range","smoothness")
-#  z <- optimize(#par=theta[-2],
+#  z <- stats::optimize(#par=theta[-2],
 #   f=ruf.vllik,
 #   interval=c(drange[1],drange[2]/3),
 #   maximum=TRUE, tol=sqrt(con$reltol),
@@ -343,7 +343,7 @@
 #   z$theta <- c(z$maximum,theta[2])
    }
    if(!fixsmoothness){
-    z <- optim(par=theta[-1],
+    z <- stats::optim(par=theta[-1],
      fn=ruf.hllik,
      hessian=TRUE,
      method=con$method,
@@ -357,7 +357,7 @@
     )
     z$theta <- c(theta[1],z$par)
     names(z$theta) <- c("range","smoothness")
-#   z <- optimize(#par=theta[-1],
+#   z <- stats::optimize(#par=theta[-1],
 #    f=ruf.hllik,
 #    interval=c(0.5,10),
 #    maximum=TRUE, tol=sqrt(con$reltol),
@@ -445,7 +445,7 @@
     }
     names(beta) <- colnames(x)
     names(theta) <- c("range","smoothness")
-    covbeta <- summary(lm(Vzn ~ -1 + xm))$cov.unscaled
+    covbeta <- summary(stats::lm(Vzn ~ -1 + xm))$cov.unscaled
     list(theta=theta, pllik=pllik, beta=beta,slope=slope, covbeta=covbeta)
    }
   }

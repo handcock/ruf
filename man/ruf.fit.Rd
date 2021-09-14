@@ -4,9 +4,20 @@
 \alias{ruf.fit}
 \title{Estimates of the Resource Utilization Function}
 \usage{
-ruf.fit(formula, space, data, subset, na.action, theta = NULL,
-  standardized = FALSE, algorithm.control = list(), name = "",
-  fixrange = FALSE, fixsmoothness = TRUE, ...)
+ruf.fit(
+  formula,
+  space,
+  data,
+  subset,
+  na.action,
+  theta = NULL,
+  standardized = FALSE,
+  algorithm.control = list(),
+  name = "",
+  fixrange = FALSE,
+  fixsmoothness = TRUE,
+  ...
+)
 }
 \arguments{
 \item{formula}{An formula object, of the form \code{RU ~ <covariate terms>},

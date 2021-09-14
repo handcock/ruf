@@ -4,10 +4,19 @@
 \alias{maternmle}
 \title{Older Style Interface to the Resource Utilization Function}
 \usage{
-maternmle(geodata, theta = NULL, cov = 1:ncol(geodata$covariate),
-  standardized = FALSE, sample = 500, trace = 0, reltol = 1e-05,
-  factr = 1e-05, results = "maternresults.out", birdname = NULL,
-  fixrange = FALSE)
+maternmle(
+  geodata,
+  theta = NULL,
+  cov = 1:ncol(geodata$covariate),
+  standardized = FALSE,
+  sample = 500,
+  trace = 0,
+  reltol = 1e-05,
+  factr = 1e-05,
+  results = "maternresults.out",
+  birdname = NULL,
+  fixrange = FALSE
+)
 }
 \arguments{
 \item{geodata}{a list containing elements `coords', `covariates', and

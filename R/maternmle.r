@@ -92,7 +92,7 @@
 #
   if(length(geodata$data) > 1000 & !missing(sample)){
    rrr <- sample((1:nrow(geodata$coords)),size=sample, replace=FALSE)
-   print(summary(lm(geodata$data ~ -1 + as.matrix(geodata$covariate))))
+   print(summary(stats::lm(geodata$data ~ -1 + as.matrix(geodata$covariate))))
    geodata <- list(covariate=geodata$covariate[rrr,],
                    coords=geodata$coords[rrr,],
                    data=geodata$data[rrr])
@@ -156,7 +156,7 @@
    if(llik.only){
     pllik
    }else{
-    covbeta <- summary(lm(Vzn ~ -1 + xm))$cov.unscaled
+    covbeta <- summary(stats::lm(Vzn ~ -1 + xm))$cov.unscaled
     list(theta=x, pllik=pllik, beta=beta,slope=slope, covbeta=covbeta)
    }
   }
@@ -165,7 +165,7 @@
   }
 #
   if(!fixrange){
-  Lout <- optim(par=theta,
+  Lout <- stats::optim(par=theta,
    fn=llik,
    hessian=TRUE,
    method="Nelder-Mead",
@@ -179,7 +179,7 @@
    Lout$theta <- Lout$par
    ffit <- llik(Lout$theta, geodata,llik.only=FALSE)
   }else{
-  Lout <- optim(par=theta[-1],
+  Lout <- stats::optim(par=theta[-1],
    fn=hllik,
    hessian=TRUE,
    method="Nelder-Mead",
@@ -238,7 +238,7 @@
     cat(paste("\nUnstandardized Coefficients for bird name:",birdname,"\n"),file=results,append=TRUE)
   }
    cat(paste("\nMatern Log-Lik =",Lout$pllik,"LS Log-Lik =",ffit$pllik,"\n"),file=results,append=TRUE)
-   cat(paste("\nChange in Log-Lik",0.5*cllik,"p-value =",1-pchisq(cllik,2),"\n"),file=results,append=TRUE)
+   cat(paste("\nChange in Log-Lik",0.5*cllik,"p-value =",1-stats::pchisq(cllik,2),"\n"),file=results,append=TRUE)
    cat(paste("\n"),file=results,append=TRUE)
 #
    if(!fixrange){

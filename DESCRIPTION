@@ -1,6 +1,6 @@
 Package: ruf
-Version: 1.5-3
-Date: 2015-05-21
+Version: 1.5-4
+Date: 2021-09-11
 Title: Estimates of the Resource Utilization Function 
 Author: Mark S. Handcock <handcock@stat.ucla.edu>
 Maintainer: Mark S. Handcock <handcock@stat.ucla.edu>
@@ -9,5 +9,5 @@ Description: The library contains R-functions to determine maximum
      Matern covariance function.
 Depends:
 License: GPL-3 + file LICENSE
-URL: http://www.csde.washington.edu/~handcock/ruf
-RoxygenNote: 6.0.1
+URL: https://github.com/handcock/ruf
+RoxygenNote: 7.1.1

@@ -1,4 +1,4 @@
-projhomepage <- "www.csde.washington.edu/handcock/ruf"
+projhomepage <- "https://github.com/handcock/ruf"
 
 ruftitle <- "Estimates of the Resource Utilization Function"
 #rufdesc <- packageDescription("ruf")
@@ -22,10 +22,10 @@ citEntry(entry="Manual",
                         ". }", 
                         sep=""),
          address      = "Los Angeles, CA",
-         url          = "http://www.csde.washington.edu/~handcock/ruf",
+         url          = "https://github.com/handcock/ruf",
          textVersion = paste(paste(rufauthors, collapse=", "), " (", rufyear,
                "), ", ruftitle, ". Version ", rufversion,
-               ". URL http://www.csde.washington.edu/~handcock/ruf.",
+               ". URL https://github.com/handcock/ruf.",
                sep="")
          )
 
