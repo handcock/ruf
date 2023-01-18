@@ -36,7 +36,7 @@ To see help on the functions type:
 help(ruf.fit)
 ```
 
-### Case study: The resource utilizatino of Bird D412
+### Case study: The resource utilization of Bird D412
 
 As an example, below is an R program to reconstruct the analysis in the paper. 
 It estimates the parameters of the model and related measures of
